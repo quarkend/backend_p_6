@@ -1,4 +1,4 @@
-const Thing = require('../models/thing')
+const Thing = require('../models/Thing')
 
 exports.creaThing = (req, res, next) => {
     delete req.body._id;
