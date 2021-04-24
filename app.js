@@ -3,9 +3,13 @@ const bodyParser = require('body-Parser');
 const mongoose = require('mongoose');
 const Thing = require('./models/thing');
 const stuffRoutes = require('./routes/stuff');
-// const userRoutes = require('./routes/User');
+
+const router = express.Router();
+
+const userRoutes = require('./routes/user');
 
 const app = express();
+mongoose.set('useCreateIndex', true);
 mongoose.connect('mongodb+srv://sopeckoko:pofonor@cluster0.6b4ux.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
 
     {
@@ -22,6 +26,9 @@ app.use((req, res, next) => {
 });
 app.use(bodyParser.json());
 app.use('/api/stuff', stuffRoutes);
+/*/api/auth laracine lier a l authentification*/
+app.use('/api/auth', userRoutes);
+
 module.exports = app;
 
 
