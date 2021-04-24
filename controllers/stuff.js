@@ -1,4 +1,4 @@
-const Thing = require('../models/Thing')
+const Thing = require('../models/thing')
 
 exports.creaThing = (req, res, next) => {
     delete req.body._id;
@@ -9,7 +9,7 @@ exports.creaThing = (req, res, next) => {
 
     });
     /* enregistrer ds la bd et retourne une promise then et un catch */
-    Thing.save()
+    thing.save()
         .then(() => res.status(201).json({ message: 'Objet enregistré !' }))
         .catch(error => res.status(400).json({ error }));
 };

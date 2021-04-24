@@ -1,10 +1,4 @@
-// const http = require('http');
 
-// const server = http.createServer((req, res) => {
-//     res.end('Voilà la réponse du serveur !');
-// });
-
-// server.listen(process.env.PORT || 3000);
 /*importer le package http de node */
 const http = require('http');
 // importer notre app QUI VA RECEVOIR LA REQ ET LA REPONSE
