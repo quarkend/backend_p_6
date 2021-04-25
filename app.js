@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-Parser');
 const mongoose = require('mongoose');
 const Thing = require('./models/thing');
-const stuffRoutes = require('./routes/stuff');
+const stuffRoutes = require('./routes/sauces');
 
 const router = express.Router();
 
@@ -28,7 +28,7 @@ app.use(bodyParser.json());
 
 /*/api/auth laracine lier a l authentification*/
 app.use('/api/auth', userRoutes);
-app.use('/api/stuff', stuffRoutes);
+app.use('/api/sauces', stuffRoutes);
 module.exports = app;
 
 

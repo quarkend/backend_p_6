@@ -1,3 +1,5 @@
+/*changement de non de fichier stauff.js par sauses.js */
+
 const Thing = require('../models/thing')
 
 exports.creaThing = (req, res, next) => {

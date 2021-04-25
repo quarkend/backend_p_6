@@ -1,9 +1,9 @@
-/******************LES SAUCES*********************** */
+/***********changement de stuff par sauces*********************** */
 
 const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
-const stuffCtrl = require('../controllers/stuff');
+const stuffCtrl = require('../controllers/sauces');
 const multer = require('../middleware/multer-config');
 
 /* la route ou le n point sur notre api*/
