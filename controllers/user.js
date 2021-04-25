@@ -17,7 +17,6 @@ exports.signup = (req, res, next) => {
         .catch(error => res.status(500).json({ error }));
 };
 
-
 exports.login = (req, res, next) => {
     User.findOne({ email: req.body.email })
         .then(user => {
@@ -31,10 +30,10 @@ exports.login = (req, res, next) => {
                     }
                     res.status(200).json({
                         userId: user._id,
-                        /**appl la fct sign de jsonwebtocken com le prem arg le plaod les donnee
-                         *  k on veu encoder le 2 arg c la kle secrt*/
-                        token: jwt.sign({ userId: user._id }, 'RANDOM_TOKEN_SECRET',
-                            { expiresIn: '24' }
+                        token: jwt.sign(
+                            { userId: user._id },
+                            'RANDOM_TOKEN_SECRET',
+                            { expiresIn: '24h' }
                         )
                     });
                 })
