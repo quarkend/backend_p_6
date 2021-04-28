@@ -1,11 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-Parser');
 const mongoose = require('mongoose');
-const Thing = require('./models/thing');
+const path = require('path');
+
 const stuffRoutes = require('./routes/sauces');
-
-const router = express.Router();
-
 const userRoutes = require('./routes/user');
 
 const app = express();
@@ -25,7 +23,7 @@ app.use((req, res, next) => {
     next();
 });
 app.use(bodyParser.json());
-
+app.use('/images', express.static(path.join(__dirname, 'images')));
 /*/api/auth laracine lier a l authentification*/
 app.use('/api/auth', userRoutes);
 app.use('/api/sauces', stuffRoutes);
