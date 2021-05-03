@@ -57,6 +57,34 @@ exports.getAllThings = (req, res, next) => {
         .catch(error => res.status(400).json({ error }));
 
 };
+exports.likeSauces = (req, res, next) => {
+    const like = req.body.like;
+    if (like === 1) { // Option like
+        Thing.updateOne({ _id: req.params.id }, { $inc: { likes: 1 }, $push: { usersLiked: req.body.userId }, _id: req.params.id })
+            .then(() => res.status(200).json({ message: "Vous aimez cette sauce !" }))
+            .catch(error => res.status(400).json({ error }))
+    } else if (like === -1) { // Option dislike
+        Thing.updateOne({ _id: req.params.id }, { $inc: { dislikes: 1 }, $push: { usersDisliked: req.body.userId }, _id: req.params.id })
+            .then(() => res.status(200).json({ message: "Vous n'aimez pas cette sauce !" }))
+            .catch(error => res.status(400).json({ error }))
+
+    } else {    // Annuler like ou dislike
+        Thing.findOne({ _id: req.params.id })
+            .then(thing => {
+                if (thing.usersLiked.indexOf(req.body.userId) !== -1) {
+                    Thing.updateOne({ _id: req.params.id }, { $inc: { likes: -1 }, $pull: { usersLiked: req.body.userId }, _id: req.params.id })
+                        .then(() => res.status(200).json({ message: "Vous n'aimez plus cette sauce !" }))
+                        .catch(error => res.status(400).json({ error }))
+                }
+                else if (thing.usersDisliked.indexOf(req.body.userId) !== -1) {
+                    Thing.updateOne({ _id: req.params.id }, { $inc: { dislikes: -1 }, $pull: { usersDisliked: req.body.userId }, _id: req.params.id })
+                        .then(() => res.status(200).json({ message: "Vous aimez cette sauce !" }))
+                        .catch(error => res.status(400).json({ error }))
+                }
+            })
+            .catch(error => res.status(400).json({ error }))
+    }
+};
 
 // // LIKE & DISLIKE
 // exports.likeStatus = (req, res, next) => {

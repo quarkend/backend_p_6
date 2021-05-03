@@ -19,6 +19,6 @@ router.put('/:id', auth, multer, stuffCtrl.modifyThing);
 /* delete le dernier crud de api*/
 router.delete('/:id', auth, stuffCtrl.deleteThing);
 
-
+router.post('/:id/like', auth, stuffCtrl.likeSauces);
 
 module.exports = router;
