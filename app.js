@@ -5,8 +5,10 @@ const path = require('path');
 
 const stuffRoutes = require('./routes/sauces');
 const userRoutes = require('./routes/user');
+const helmet = require('helmet')
 
 const app = express();
+
 mongoose.set('useCreateIndex', true);
 mongoose.connect('mongodb+srv://sopeckoko:pofonor@cluster0.6b4ux.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
 
@@ -27,6 +29,9 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 /*/api/auth laracine lier a l authentification*/
 app.use('/api/auth', userRoutes);
 app.use('/api/sauces', stuffRoutes);
+/*X - XSS - Protection vulnérabilités les plus courantes*/
+app.use(helmet.xssFilter());
+app.use(helmet.frameguard({ action: 'deny' }));
 module.exports = app;
 
 
