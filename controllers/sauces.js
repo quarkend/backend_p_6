@@ -10,7 +10,7 @@ exports.createThing = (req, res, next) => {
     const thing = new Sauce({
         /*ici aussi ...req.body devient...thingObject*/
         ...thingObject,
-        /* recup l urel dinamiquement req.protocol = soit http *+ le host de notre serveur (3000) +le nom du fichier/*/
+        /* recuperation de  url dinamiquement req.protocol =  http *+ le host de notre serveur (3000) +le nom du fichier/*/
         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     });
     thing.save()
