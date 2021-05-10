@@ -1,14 +1,12 @@
 const Sauce = require('../models/thing');
 const fs = require('fs');
 const { json } = require('body-parser');
-/***req.body.thing ki sera 1 cahine de caracter mais qui sera on faite un objet js sous forme 
- * de chain d caracter il faut analyser et transformer on c de c */
+/***req.body.thing sera un objet analyser et transformer on chaine de caractere */
 exports.createThing = (req, res, next) => {
-    /*la methode json.parce et on lui pass req.body.thing extrair l objet json de thing*/
-    let thingObject = JSON.parse(req.body.sauce);
-    // console.log(JSON.parse(req.body.thing));
-    /**en eleve le id de thigObject au lieu de req.body.thing */
-    // delete thingObject._id;
+    /*la methode json.parce  on lui passe req.body.thing pour extraire l objet json de thing*/
+    let thingObject = json.parse(req.body.sauce);
+    /**en enleve le id de thigObject au lieu de req.body.thing */
+    delete thingObject._id;
     const thing = new Sauce({
         /*ici aussi ...req.body devient...thingObject*/
         ...thingObject,
@@ -43,18 +41,14 @@ exports.deleteThing = (req, res, next) => {
         .catch(error => res.status(500).json({ error }));
 };
 exports.getOneThing = (req, res, next) => {
-    /* req.params.id*/
     Sauce.findOne({ _id: req.params.id })
         .then(thing => res.status(200).json(thing))
         .catch(error => res.status(404).json({ error }));
-
-
 };
 exports.getAllThings = (req, res, next) => {
     Sauce.find()
         .then(things => res.status(200).json(things))
         .catch(error => res.status(400).json({ error }));
-
 };
 exports.likeSauces = (req, res, next) => {
     const like = req.body.like;
