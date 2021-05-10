@@ -1,10 +1,10 @@
 const Sauce = require('../models/thing');
 const fs = require('fs');
-const { json } = require('body-parser');
+const { JSON } = require('body-parser');
 /***req.body.thing sera un objet analyser et transformer on chaine de caractere */
 exports.createThing = (req, res, next) => {
     /*la methode json.parce  on lui passe req.body.thing pour extraire l objet json de thing*/
-    let thingObject = json.parse(req.body.sauce);
+    let thingObject = JSON.parse(req.body.sauce);
     /**en enleve le id de thigObject au lieu de req.body.thing */
     delete thingObject._id;
     const thing = new Sauce({
