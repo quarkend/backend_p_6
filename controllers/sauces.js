@@ -10,7 +10,7 @@ exports.createThing = (req, res, next) => {
     const thing = new Sauce({
         /*ici aussi ...req.body devient...thingObject*/
         ...thingObject,
-        /* recup l urel dinamiquement req.protocol = soit http *+ le host de notre serveur (3000) +le nom du fichier/*/
+        /* recup l url dinamiquement req.protocol = soit http *+ le host de notre serveur (3000) +le nom du fichier/*/
         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     });
     thing.save()
@@ -21,7 +21,6 @@ exports.modifyThing = (req, res, next) => {
     const thingObject = req.file ?
         {
             ...JSON.parse(req.body.thing),
-
             imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
         } : { ...req.body };
     Sauce.updateOne({ _id: req.params.id }, { ...thingObject, _id: req.params.id })
@@ -60,7 +59,6 @@ exports.likeSauces = (req, res, next) => {
         Sauce.updateOne({ _id: req.params.id }, { $inc: { dislikes: 1 }, $push: { usersDisliked: req.body.userId }, _id: req.params.id })
             .then(() => res.status(200).json({ message: "Vous n'aimez pas cette sauce !" }))
             .catch(error => res.status(400).json({ error }))
-
     } else {    // Annuler like ou dislike
         Sauce.findOne({ _id: req.params.id })
             .then(thing => {

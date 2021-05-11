@@ -1,7 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
-
 exports.signup = (req, res, next) => {
     bcrypt.hash(req.body.password, 10)
         .then(hash => {
@@ -15,7 +14,6 @@ exports.signup = (req, res, next) => {
         })
         .catch(error => res.status(500).json({ error }));
 };
-
 exports.login = (req, res, next) => {
     User.findOne({ email: req.body.email })
         .then(user => {
@@ -40,25 +38,23 @@ exports.login = (req, res, next) => {
         })
         .catch(error => res.status(500).json({ error }));
 };
-
-// //Masquage des e-mails
-
-// const gap = 800;
-// function mask(email, reveal = false) {
-//     let newMail = "";
-//     let arobase = false;
-//     for (let i = 0; i < email.length; i++) {
-//         if (email[i] === "@") {
-//             newMail += "@";
-//             arobase = true;
-//             continue;
-//         }
-//         if (arobase && email[i] === ".") {
-//             newMail += email.slice(i);
-//             break;
-//         }
-//         if (reveal) newMail += String.fromCharCode(email.charCodeAt(i) - gap);
-//         else newMail += String.fromCharCode(email.charCodeAt(i) + gap);
-//     }
-//     return newMail;
-// }
+//Masquage des e-mails
+const gap = 800;
+function mask(email, reveal = false) {
+    let newMail = "";
+    let arobase = false;
+    for (let i = 0; i < email.length; i++) {
+        if (email[i] === "@") {
+            newMail += "@";
+            arobase = true;
+            continue;
+        }
+        if (arobase && email[i] === ".") {
+            newMail += email.slice(i);
+            break;
+        }
+        if (reveal) newMail += String.fromCharCode(email.charCodeAt(i) - gap);
+        else newMail += String.fromCharCode(email.charCodeAt(i) + gap);
+    }
+    return newMail;
+}
