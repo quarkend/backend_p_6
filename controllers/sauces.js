@@ -1,6 +1,6 @@
 const Sauce = require('../models/thing');
 const fs = require('fs');
-const { JSON } = require('body-parser');
+const { json } = require('body-parser');
 /***req.body.thing sera un objet analyser et transformer on chaine de caractere */
 exports.createThing = (req, res, next) => {
     /*la methode json.parce  on lui passe req.body.thing pour extraire l objet json de thing*/
@@ -10,7 +10,7 @@ exports.createThing = (req, res, next) => {
     const thing = new Sauce({
         /*ici aussi ...req.body devient...thingObject*/
         ...thingObject,
-        /* recuperation de  url dinamiquement req.protocol =  http *+ le host de notre serveur (3000) +le nom du fichier/*/
+        /* recup l urel dinamiquement req.protocol = soit http *+ le host de notre serveur (3000) +le nom du fichier/*/
         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     });
     thing.save()

@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-Parser');
 const mongoose = require('mongoose');
 const path = require('path');
+require('dotenv').config()
 
 const stuffRoutes = require('./routes/sauces');
 const userRoutes = require('./routes/user');
@@ -10,6 +11,7 @@ const helmet = require('helmet')
 const app = express();
 
 mongoose.set('useCreateIndex', true);
+// ${process.env.DBUSER}:${process.env.DBPASSWORD}@${process.env.DBHOST}
 mongoose.connect('mongodb+srv://sopeckoko:pofonor@cluster0.6b4ux.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
 
     {

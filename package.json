@@ -2,6 +2,7 @@
   "dependencies": {
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
+    "dotenv": "^9.0.2",
     "express": "^4.17.1",
     "helmet": "^4.6.0",
     "jsonwebtoken": "^8.5.1",
@@ -10,6 +11,6 @@
     "multer": "^1.4.2"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.1102.10"
+    "@angular-devkit/build-angular": "^0.1102.12"
   }
 }

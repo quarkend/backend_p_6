@@ -1,4 +1,4 @@
-
+ require('dotenv').config()
 /*importer le package http de node */
 const http = require('http');
 // importer notre app QUI VA RECEVOIR LA REQ ET LA REPONSE
