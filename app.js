@@ -8,7 +8,7 @@ const userRoutes = require('./routes/user');
 const helmet = require('helmet')
 const app = express();
 mongoose.set('useCreateIndex', true);
-mongoose.connect('mongodb+srv://sopeckoko:pofonor@cluster0.6b4ux.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+mongoose.connect(`mongodb+srv://${process.env.DBUSER}:${process.env.DBPASSWORD}@${process.env.DBHOST}?retryWrites=true&w=majority`,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true
