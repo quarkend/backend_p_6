@@ -29,4 +29,3 @@ app.use('/api/sauces', stuffRoutes);
 app.use(helmet.xssFilter());
 app.use(helmet.frameguard({ action: 'deny' }));
 module.exports = app;
-

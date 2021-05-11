@@ -6,7 +6,6 @@ const app = require('./app');
 /*choix du port avec amelioration*/
 const normalizePort = val => {
     const port = parseInt(val, 10);
-
     if (isNaN(port)) {
         return val;
     }
@@ -17,7 +16,6 @@ const normalizePort = val => {
 };
 const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
-
 const errorHandler = error => {
     if (error.syscall !== 'listen') {
         throw error;
@@ -39,7 +37,6 @@ const errorHandler = error => {
 };
 /* creation de la fonction qui sera appler a chaque requette recus par le server elle  2 arguments req et res*/
 const server = http.createServer(app);
-
 server.on('error', errorHandler);
 server.on('listening', () => {
     const address = server.address();
@@ -48,4 +45,3 @@ server.on('listening', () => {
 });
 /* la il doit ecouter les requettes envoyer  */
 server.listen(port);
-
